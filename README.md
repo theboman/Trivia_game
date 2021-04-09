@@ -22,9 +22,9 @@ Goals - To make a simple trivia game with True/False answers. Retrive questions 
 - [x] API working, simply get 10 questions.
 - [ ] Format data correctly /Regex 
 - [x] State for user response / percentage of questions asked
-- [ ] Feedback to user on questions correct / incorrect, perhaps an overlay with a big :x: or :+1 checkmark :white_check_mark:?
+  - [ ] Feedback to user on questions correct / incorrect, perhaps an overlay with a big :x: or :+1: checkmark :white_check_mark:?
 - [ ] Results screen
-- [ ] - Summery of total questions asked. 
+  - [ ] - Summery of total questions asked. 
 - [ ] reset game
 
 </br>
