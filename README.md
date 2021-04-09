@@ -2,13 +2,16 @@
 
 Goals - make a simple 10 question True/False game. Get questions from an API endpoint. The project is to demonstrate. 
   1. Use of API
+    * Simple error handling.
+    * Correct formating of given data. 
+
   2. Modularity of react components
-      * button
-      * header
-      * card
+      * Button
+      * Header
+      * Card
 
   3. Modularity of utilty functions?
-      * regex parser
+      * Regex parser
 
 
   

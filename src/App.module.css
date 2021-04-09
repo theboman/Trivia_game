@@ -1,4 +1,67 @@
+.App {
+  display:flex;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+}
 .container {
   width: 350px;
-  background:red;
+  background:green;
+  border-radius: 5px;
+}
+
+.heading {
+  font-size: 2em;
+  font-weight:bold;
+  padding: 5px 10px;
+}
+
+.headingsub {
+  font-size: .5em;
+  color: rgb(59, 59, 59);
+}
+
+.question {
+  size: 3em;
+  padding: 10px;
+
+}
+
+.questionsubscript {
+  font-size: 40px;
+}
+
+.card {
+  background: white;
+  width: 300px;
+  margin: 10px auto;
+  border-radius: 9px;
+  min-height: 150px;
+  /* padding: 10px 0; */
+}
+
+.btn_container {
+  display:flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  background-color: blueviolet;
+  border-radius: 5px;
+  
+}
+
+.btn {
+  margin: 10px;
+  padding: 10px 20px;
+  font-size: 1.2em;
+  border-radius: 10px;
+  color:white;
+}
+
+.btn_red {
+  background-color:red;
+}
+
+.btn_green {
+  background-color:green;
 }
