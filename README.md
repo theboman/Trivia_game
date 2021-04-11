@@ -4,31 +4,31 @@ Goals - To make a simple trivia game with True/False answers. Retrive questions 
 
   1. Use of API
     * Simple error handling.
-    * Correct formating of given data. 
+    * Correct formating of given data. // using an external NPM package React HTML parser for this. 
     * Mutating this data, adding another field per record.
 
   2. Modularity of react components
       * Button
       * Header
       * Card
-
-  3. Modularity of utilty functions?
-      * Regex parser
+      * Table?
 
   
 ---
 ## Todos stuff to work on complete. Used to show logic of construction. 
-
+- [ ] 3 screens working intro screen, game, results.
 - [x] API working, simply get 10 questions.
-- [ ] Format data correctly /Regex 
+- [ ] Format question correctly /Regex 
 - [x] State for user response / percentage of questions asked
-  - [ ] Feedback to user on questions correct / incorrect, perhaps an overlay with a big :x: or :+1: checkmark :white_check_mark:?
+- [ ] feedback to correct / incorrect responses. Perhaps an overlay with a big :x: or :+1: checkmark :white_check_mark:?
 - [ ] Results screen
-  - [ ] - Summery of total questions asked. 
+  - [ ] Summery of total questions asked as a table? 
 - [ ] reset game
 
 </br>
 
 ## Summery of project: 
-Not happy with being able to use react dev tools and view the state / answers. Would correct this with the server side and make these another endpoint in a real world situation. 
+<p>
+Not happy with being able to use react dev tools and view the state / answers. Would correct this with the server side and make these another endpoint in a real world situation. </p>
+<p>Was thinking of creating a /regex replace for each of the HTML codes but easiter to use React HTML parser :). </p>
 

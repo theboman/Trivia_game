@@ -15,33 +15,28 @@ function App() {
 
 
 
-  useEffect(()=> {
-    setLoading(true);
-    const fetchTrivia = () => {
-      return fetch('https://opentdb.com/api.php?amount=10&difficulty=hard&type=boolean')
-    
-      .then((res) => res.json())
-      .then((data) => {
-        
-        const [...questions] = data.results;
-        questions.forEach(question => question.users_answer="" )
-        //console.log("questions: ", questions)
-        setTrivia(questions);
-        //console.log("this is state:",trivia);
-        setLoading(false); 
-        //console.log("loading is:",loading);
-         
-      })
-      .catch((e) => {
-        console.error(e);
-        setLoading(false);
-        setError('Fetching Trivia Questions Failed')
-      });
-    }
-    fetchTrivia();
-  }, []);
 
-  
+  useEffect(()=> {
+
+    async function fetchData(){
+      setLoading(true);
+      try {
+      const response = await fetch('https://opentdb.com/api.php?amount=10&difficulty=hard&type=boolean');
+      const data = await response.json()
+      const [...questions] = data.results;
+      questions.forEach(question => question.users_answer="" ) //adds the users response to the returned questions
+      setTrivia(questions);
+      setLoading(false); 
+      } catch (err) {
+        setError(err);
+      }
+
+    }
+
+    fetchData();
+    
+    
+  }, []);
 
 const btnHandler = (answer) => {
   
@@ -58,9 +53,6 @@ const btnHandler = (answer) => {
   }
     
 }
-
-//console.log("after increment:",questionNum);
-
 
 
 
@@ -98,7 +90,10 @@ const btnHandler = (answer) => {
             <div className={styles.card}>
               <div className={styles.question}>
                 <span className={styles.questionsubscript}>Q: </span>
+                <>
                 {trivia && trivia[questionNum].question}
+                </>
+                {/* {StringswithHTML.html} */}
                 This is the answer:{trivia && trivia[questionNum].correct_answer}
               </div>
             </div>
