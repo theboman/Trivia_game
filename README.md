@@ -1,5 +1,7 @@
 # A simple Trivia Game 
 
+[live example](https://trivia-game-4wuwklnds-boopfer9k9.vercel.app/)
+
 Goals - To make a simple trivia game with True/False answers. Retrive questions from an API endpoint. Project is to demonstrate:
 
   1. Use of API (using async, superior to promise. async uses generators truly waits for response.)
