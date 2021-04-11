@@ -74,6 +74,10 @@
   color:white;
 }
 
+.btn:focus {
+  outline:0;
+}
+
 .btn_red {
   background-color:red;
 }
