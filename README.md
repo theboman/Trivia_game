@@ -2,7 +2,7 @@
 
 [live example](https://trivia-game-4wuwklnds-boopfer9k9.vercel.app/)
 
-![alt text](https://github.com/theboman/Trivia_game/blob/master/public/trivia_game_image.png?raw=true)
+<img src="https://github.com/theboman/Trivia_game/blob/master/public/trivia_game_image.png?raw=true" alt="triva app"  height="340">
 
 
 Goals - To make a simple trivia game with True/False answers. Retrive questions from an API endpoint. Project is to demonstrate:
