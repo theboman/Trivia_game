@@ -1,0 +1,41 @@
+table {
+  width: 320px;
+  /* background-color:pink; */
+  border-collapse: collapse;
+  text-align: center;
+
+}
+
+thead {
+  background-color: rgb(13, 35, 35);
+  font-size: .75em;
+  font-weight: bold;
+  text-align: center;
+  color: white;
+  
+}
+
+
+
+.question {
+  font-size: .8em;
+  text-align: left;
+}
+
+.hdnum {
+  width: 20px;
+}
+
+th, td {
+  padding: 5px;
+  border-bottom: 1px solid rgb(28, 28, 28);
+
+}
+
+.correct {
+  background-color: rgba(11, 159, 11, .4);
+}
+
+.incorrect {
+  background-color: rgba(241, 16, 16, 0.3);
+}

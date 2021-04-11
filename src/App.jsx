@@ -2,6 +2,7 @@ import { useState, useEffect} from 'react';
 import ReactHtmlParser from 'react-html-parser';
 
 import styles from './App.module.css';
+import Table from './components/Table/Table';
 
 
 
@@ -77,49 +78,55 @@ const resetHandler = () => {
   // screen 2
 
 
- for(;questionNum < trivia.length;) 
- {
-  return (
-    <div className={styles.App}>
+//  for(;questionNum < trivia.length;) 
+//  {
+//   return (
+//     <div className={styles.App}>
         
-          <div className={styles.container}>
+//           <div className={styles.container}>
             
-            <div className={styles.heading}>
+//             <div className={styles.heading}>
               
-              <div className={styles.headingsub}>
-                Question: {questionNum+1} of {trivia.length} Score: {score}/{trivia.length}
-                <br/> <br/>
-                Category: 
-              </div>
-              {trivia && trivia[questionNum].category}
+//               <div className={styles.headingsub}>
+//                 Question: {questionNum+1} of {trivia.length} Score: {score}/{trivia.length}
+//                 <br/> <br/>
+//                 Category: 
+//               </div>
+//               {trivia && trivia[questionNum].category}
             
-            </div>
+//             </div>
             
-            <div className={styles.card}>
-              <div className={styles.question}>
+//             <div className={styles.card}>
+//               <div className={styles.question}>
 
-                Q: {trivia && ReactHtmlParser(trivia[questionNum].question)}
+//                 Q: {trivia && ReactHtmlParser(trivia[questionNum].question)}
                 
                 
-              </div>
+//               </div>
 
-                <p>
-                This is the answer:{trivia && trivia[questionNum].correct_answer}
-                </p>
-            </div>
+//                 <p>
+//                 This is the answer:{trivia && trivia[questionNum].correct_answer}
+//                 </p>
+//             </div>
 
-            <div className={styles.btn_container}>
-              <button className={`${styles.btn} ${styles.btn_red}`} onClick={()=>btnHandler("true")}>True</button>
-              <button className={`${styles.btn} ${styles.btn_green}`} onClick={()=>btnHandler("false")}>False</button>
+//             <div className={styles.btn_container}>
+//               <button className={`${styles.btn} ${styles.btn_red}`} onClick={()=>btnHandler("true")}>True</button>
+//               <button className={`${styles.btn} ${styles.btn_green}`} onClick={()=>btnHandler("false")}>False</button>
               
-            </div>
+//             </div>
 
 
-        </div>
+//         </div>
   
-    </div>
-  )
- }
+//     </div>
+//   )
+//  }
+
+return (
+  <>
+  <Table/>
+  </>
+)
 
 if (questionNum === trivia.length) {
   return (

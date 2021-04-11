@@ -25,6 +25,7 @@ Goals - To make a simple trivia game with True/False answers. Retrive questions 
   - [ ] Summery of total questions asked as a table? 
 - [x] reset game, a bit hacky using a form with default settings to reset entire game.
 - [ ] refactor make everything a component. 
+- [ ] add animations?
 
 </br>
 
