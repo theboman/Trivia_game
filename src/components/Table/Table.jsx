@@ -2,10 +2,10 @@ import styles from './Table.module.css'
 import ReactHtmlParser from 'react-html-parser';
 
 
-const Table = (props) => {
+const Table = ({trivia}) => {
+  
 
-
-  const trivia = [
+  const quiz = [
       {
         category: "Entertainment: Video Games",
         type: "boolean",
@@ -59,8 +59,9 @@ const Table = (props) => {
   console.log(trivia);
 
 
-
   return (
+    <>
+    
     <table>
       <thead>
         <tr>
@@ -74,42 +75,41 @@ const Table = (props) => {
             Correct Answer
           </th>
           <th>
-            Result
+            Your Answer
           </th>
         </tr>
       </thead>
 
       <tbody>
-
-      {trivia.map((trivia, index)=> {
-        return (
-          <tr key={index} className={trivia.users_answer === "correct"? styles.correct: styles.incorrect} >
-            <td>
-            {index}
-            
-            </td>
-
-            <td className={styles.question}>
-              {ReactHtmlParser(trivia.question)}
-            </td>
-
-            <td>
-              {trivia.correct_answer}
+        {trivia.map((trivia, index)=> {
+          return (
+            <tr key={index} className={trivia.users_answer === "correct"? styles.correct: styles.incorrect} >
+              <td>
+              {index+1}
               
-            </td>
+              </td>
 
-            <td >
-           {trivia.users_answer === "correct"? <div> correct</div>: <div> X</div>}
+              <td className={styles.question}>
+                {ReactHtmlParser(trivia.question)}
+              </td>
+
+              <td>
+                {trivia.correct_answer}
+                
+              </td>
+
+              <td >
+                {trivia.users_answer === "correct"? <div> correct</div>: <div> X</div>}
 
 
-          </td>
-        </tr>
-        )
-  } )}
-
+              </td>
+            </tr>
+          )
+        })}
       </tbody>
       
     </table>
+    </>
   )
 }
 

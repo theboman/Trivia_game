@@ -1,8 +1,9 @@
 table {
-  width: 320px;
+  width: 330px;
   /* background-color:pink; */
   border-collapse: collapse;
   text-align: center;
+  margin: 5px;
 
 }
 
@@ -14,7 +15,6 @@ thead {
   color: white;
   
 }
-
 
 
 .question {
