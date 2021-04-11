@@ -4,61 +4,6 @@ import ReactHtmlParser from 'react-html-parser';
 
 const Table = ({trivia}) => {
   
-
-  const quiz = [
-      {
-        category: "Entertainment: Video Games",
-        type: "boolean",
-        difficulty: "hard",
-        question: "The first &quot;Metal Gear&quot; game was released for the PlayStation 1.",
-        correct_answer: "False",
-        users_answer:"correct",
-        incorrect_answers: [
-            "correct"
-        ],
-        
-    },
-    {
-      category: "Science: Mathematics",
-      type: "boolean",
-      difficulty: "hard",
-      question: "The binary number &quot;101001101&quot; is equivalent to the Decimal number &quot;334&quot;",
-      correct_answer: "False",
-      users_answer:"incorrect",
-      incorrect_answers: [
-          "incorrect"
-      ],
-      
-    },
-    {
-      category: "Science: Mathematics",
-      type: "boolean",
-      difficulty: "hard",
-      question: "The binary number &quot;101001101&quot; is equivalent to the Decimal number &quot;334&quot;",
-      correct_answer: "False",
-      users_answer:"incorrect",
-      incorrect_answers: [
-          "incorrect"
-      ],
-      
-    },
-    {
-      category: "Science: Mathematics",
-      type: "boolean",
-      difficulty: "hard",
-      question: "The binary number &quot;101001101&quot; is equivalent to the Decimal number &quot;334&quot;",
-      correct_answer: "False",
-      users_answer:"correct",
-      incorrect_answers: [
-          "incorrect"
-      ],
-      
-    }
-  ];
-
-  console.log(trivia);
-
-
   return (
     <>
     
