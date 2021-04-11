@@ -6,8 +6,10 @@
 }
 .container {
   width: 350px;
-  background:green;
+  background:rgb(234, 234, 234);
   border-radius: 5px;
+  box-shadow:5px 5px 8px 1px #888888;
+  margin-top: 20px;
 }
 
 .heading {
@@ -22,21 +24,32 @@
 }
 
 .question {
-  size: 3em;
+  font-size: 1.25em;
+  line-height: 1.5;
   padding: 10px;
 
 }
 
-.questionsubscript {
-  font-size: 40px;
+.question::first-letter {
+  
+  font-size: 2em;
+  padding: 8px 5px;
+  float: left;
+  line-height: 1;
+  font-weight: bold;
+  margin-right: 9px;
+  background-color: #f6f6b6;
+  border-radius: 5px;
+
+
 }
 
 .card {
   background: white;
-  width: 300px;
-  margin: 10px auto;
+  width: 320px;
+  margin: 5px auto;
   border-radius: 9px;
-  min-height: 150px;
+  min-height: 100px;
   /* padding: 10px 0; */
 }
 
@@ -45,7 +58,7 @@
   justify-content: center;
   align-content: center;
   align-items: center;
-  background-color: blueviolet;
+  background-color: rgb(242, 242, 243);
   border-radius: 5px;
   
 }

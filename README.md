@@ -2,7 +2,7 @@
 
 Goals - To make a simple trivia game with True/False answers. Retrive questions from an API endpoint. Project is to demonstrate:
 
-  1. Use of API
+  1. Use of API (using async, superior to promise. async uses generators truly waits for response.)
     * Simple error handling.
     * Correct formating of given data. // using an external NPM package React HTML parser for this. 
     * Mutating this data, adding another field per record.
@@ -18,12 +18,13 @@ Goals - To make a simple trivia game with True/False answers. Retrive questions 
 ## Todos stuff to work on complete. Used to show logic of construction. 
 - [ ] 3 screens working intro screen, game, results.
 - [x] API working, simply get 10 questions.
-- [ ] Format question correctly /Regex 
+- [x] Format question correctly 
 - [x] State for user response / percentage of questions asked
 - [ ] feedback to correct / incorrect responses. Perhaps an overlay with a big :x: or :+1: checkmark :white_check_mark:?
 - [ ] Results screen
   - [ ] Summery of total questions asked as a table? 
-- [ ] reset game
+- [x] reset game, a bit hacky using a form with default settings to reset entire game.
+- [ ] refactor make everything a component. 
 
 </br>
 

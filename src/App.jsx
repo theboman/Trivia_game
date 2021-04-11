@@ -1,4 +1,5 @@
 import { useState, useEffect} from 'react';
+import ReactHtmlParser from 'react-html-parser';
 
 import styles from './App.module.css';
 
@@ -11,7 +12,8 @@ function App() {
   const [error, setError] = useState('');
   const [questionNum, setQuestionNum] = useState(0); //users current question number
   const [score, setScore] = useState(0); //users current score
-
+  // const [reset, setReset] = useState(false); //resets game
+  
 
 
 
@@ -50,15 +52,16 @@ const btnHandler = (answer) => {
   else {
     console.log("Sorry thats wrong")
     trivia[questionNum].users_answer="wrong";
-  }
-    
+  } 
 }
 
+const resetHandler = () => {
+  console.log("reset!")
+}
 
-
+// loading screen
 
   if(loading) {
-    //console.log(loading);
     return (
     <h2> loading... </h2>
     )
@@ -67,6 +70,11 @@ const btnHandler = (answer) => {
   if(error !== '') {
     return <p> {error}</p>
   }
+
+  // some sort of welcome / intro screen
+
+
+  // screen 2
 
 
  for(;questionNum < trivia.length;) 
@@ -79,9 +87,9 @@ const btnHandler = (answer) => {
             <div className={styles.heading}>
               
               <div className={styles.headingsub}>
-                Question {questionNum+1} of {trivia.length} Your Score is: {score}/{trivia.length}
+                Question: {questionNum+1} of {trivia.length} Score: {score}/{trivia.length}
                 <br/> <br/>
-                Category---: 
+                Category: 
               </div>
               {trivia && trivia[questionNum].category}
             
@@ -89,13 +97,15 @@ const btnHandler = (answer) => {
             
             <div className={styles.card}>
               <div className={styles.question}>
-                <span className={styles.questionsubscript}>Q: </span>
-                <>
-                {trivia && trivia[questionNum].question}
-                </>
-                {/* {StringswithHTML.html} */}
-                This is the answer:{trivia && trivia[questionNum].correct_answer}
+
+                Q: {trivia && ReactHtmlParser(trivia[questionNum].question)}
+                
+                
               </div>
+
+                <p>
+                This is the answer:{trivia && trivia[questionNum].correct_answer}
+                </p>
             </div>
 
             <div className={styles.btn_container}>
@@ -110,6 +120,23 @@ const btnHandler = (answer) => {
     </div>
   )
  }
+
+if (questionNum === trivia.length) {
+  return (
+
+    <form onSubmit={resetHandler}>
+    Thats it folks!
+    <input type="submit" value="play again?"/> 
+    </form> 
+
+
+
+
+  )
+}
+
+
+
   
 };
 
