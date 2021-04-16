@@ -1,6 +1,7 @@
 import { useState, useEffect} from 'react';
 import ReactHtmlParser from 'react-html-parser';
 
+
 import styles from './App.module.css';
 import Table from './components/Table/Table';
 
@@ -15,9 +16,6 @@ function App() {
   const [score, setScore] = useState(0); //users current score
   // const [reset, setReset] = useState(false); //resets game
   
-
-
-
 
   useEffect(()=> {
 
@@ -104,9 +102,9 @@ const resetHandler = () => {
                 
               </div>
 
-                <p>
+                {/* <p>
                 This is the answer:{trivia && trivia[questionNum].correct_answer}
-                </p>
+                </p> */}
             </div>
 
             <div className={styles.btn_container}>
@@ -122,19 +120,7 @@ const resetHandler = () => {
   )
  }
 
-// return (
-//   <>
-//   <div className={styles.App}>
-//     <div className={styles.container}>
-//     <div className={styles.heading}>Results</div>
-//       <Table trivia={trivia}/>
-//       <form onSubmit={resetHandler}>
-//           <input type="submit" value="play again?"/> 
-//       </form> 
-//     </div>
-//   </div>
-//   </>
-// )
+// screen 03 final results
 
 if (questionNum === trivia.length) {
   return (
@@ -144,20 +130,13 @@ if (questionNum === trivia.length) {
     <div className={styles.heading}>Results</div>
       <Table trivia={trivia}/>
       <form onSubmit={resetHandler}>
-          <input className={`${styles.btn} ${styles.btn_green}`} type="submit" value="play again?"/> 
+          <input className={`${styles.btn} ${styles.btn_green}`} type="submit" value="Play Again?"/> 
       </form> 
     </div>
   </div>
   </>
-
-
-
-
   )
 }
-
-
-
   
 };
 

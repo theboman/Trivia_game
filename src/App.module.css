@@ -35,7 +35,6 @@
 }
 
 .question::first-letter {
-  
   font-size: 2em;
   padding: 8px 5px;
   float: left;
@@ -44,8 +43,6 @@
   margin-right: 9px;
   background-color: #f6f6b6;
   border-radius: 5px;
-
-
 }
 
 .card {
@@ -53,8 +50,7 @@
   width: 320px;
   margin: 5px auto;
   border-radius: 9px;
-  min-height: 100px;
-  /* padding: 10px 0; */
+  /* min-height: 100px; */
 }
 
 .btn_container {
