@@ -31,11 +31,9 @@ function App() {
       } catch (err) {
         setError(err);
       }
-
     }
 
     fetchData();
-    
     
   }, []);
 
@@ -46,11 +44,11 @@ const btnHandler = (answer) => {
   if(answer === trivia[questionNum].correct_answer.toLowerCase()) {
     console.log("thats correct jack");
     setScore(score+1);
-    trivia[questionNum].users_answer="correct";
+    trivia[questionNum].users_answer="True";
   }
   else {
     console.log("Sorry thats wrong")
-    trivia[questionNum].users_answer="wrong";
+    trivia[questionNum].users_answer="False";
   } 
 }
 
@@ -82,14 +80,40 @@ const resetHandler = () => {
     <div className={styles.App}>
         
           <div className={styles.container}>
+
+            <div className={styles.score}>
+                <div className={styles.score_box}>
+
+                  <div className={styles.score_heading}>
+                    Question:
+                  </div>
+
+                  <div className={styles.score_results}>
+                    {questionNum+1} of {trivia.length}
+                  </div>
+
+                </div>
+
+                <div className={styles.score_box}>
+
+                    <div className={styles.score_heading}>
+                      Score: 
+                    </div>
+
+                    <div className={styles.score_results}>
+                        {score}/{trivia.length}
+                    </div>
+
+                 </div>
+                 
+                
+            </div>
             
             <div className={styles.heading}>
               
-              <div className={styles.headingsub}>
-                Question: {questionNum+1} of {trivia.length} Score: {score}/{trivia.length}
-                <br/> <br/>
-                Category: 
-              </div>
+              
+              <div className="heading">Category: </div>
+              
               {trivia && trivia[questionNum].category}
             
             </div>
@@ -98,13 +122,14 @@ const resetHandler = () => {
               <div className={styles.question}>
 
                 Q: {trivia && ReactHtmlParser(trivia[questionNum].question)}
+
                 
                 
               </div>
 
-                {/* <p>
+                <p>
                 This is the answer:{trivia && trivia[questionNum].correct_answer}
-                </p> */}
+                </p>
             </div>
 
             <div className={styles.btn_container}>

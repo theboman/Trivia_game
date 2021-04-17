@@ -21,7 +21,7 @@ Goals - To make a simple trivia game with True/False answers. Retrive questions 
 ---
 ## Todos stuff to work on complete. Used to show logic of construction. 
 - [ ] 3 screens working intro screen, game, results.
-- [ ] Global css reset, boxsizing
+- [x] Global css reset, boxsizing
 - [x] API working, simply get 10 questions.
 - [x] Format question correctly 
 - [x] State for user response / percentage of questions asked
