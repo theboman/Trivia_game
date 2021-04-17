@@ -28,7 +28,7 @@ const Table = ({trivia}) => {
       <tbody>
         {trivia.map((trivia, index)=> {
           return (
-            <tr key={index} className={trivia.users_answer === trivia.correct_answer? styles.correct: styles.incorrect} >
+            <tr key={index} className={trivia.users_answer === "Correct"? styles.correct: styles.incorrect} >
               <td>
               {index+1}
               
@@ -44,8 +44,7 @@ const Table = ({trivia}) => {
               </td>
 
               <td >
-                {trivia.users_answer === "True"? <div> Correct</div>: <div> X</div>}
-                {/* {trivia.users_answer} */}
+                {trivia.users_answer}
 
 
               </td>
