@@ -52,12 +52,10 @@ const scoreHandler = (answer) => {
   setQuestionNum(questionNum+1);
 
   if(answer === trivia[questionNum].correct_answer.toLowerCase()) {
-    console.log("thats correct jack");
     setScore(score+1);
-    trivia[questionNum].users_answer="Correct";
+    trivia[questionNum].users_answer="Correct"; 
   }
   else {
-    console.log("Sorry thats wrong")
     trivia[questionNum].users_answer="Wrong";
   } 
 }
@@ -68,7 +66,6 @@ const startHandler = () => {
 }
 
 const resetHandler = () => {
-  
   console.log("reset!");
   setTrivia([]);
   setQuestionNum(0);
@@ -76,9 +73,6 @@ const resetHandler = () => {
   setStart(false);
   setLoading(true);
   setReset(true);
-  
-
-
 }
 
 // loading screen
@@ -87,24 +81,16 @@ const resetHandler = () => {
   if (!start) {
     return (
       
-      
-
       <div className={styles.App}>
            <div className={styles.container}>
-           {loading ? <h2>Loading...</h2> : <h2>{error}</h2> }
-           {!loading && (
-             <>
-           <p> these are the instructions </p>
-            <button className={`${styles.btn} ${styles.btn_green}`} onClick={startHandler} >Start Game!</button>
-            </>
-           )}
-
-
-            
+            {loading ? <h2>Loading...</h2> : <h2>{error}</h2> }
+            {!loading && (
+              <>
+            <p> these are the instructions </p>
+              <button className={`${styles.btn} ${styles.btn_green}`} onClick={startHandler} >Start Game!</button>
+              </>
+            )}
            </div>
-
-
-
 
       </div>
       
@@ -145,39 +131,35 @@ const resetHandler = () => {
                         {score}/{trivia.length}
                     </div>
 
-                 </div>
-                 
+                </div> 
                 
             </div>
             
             <div className={styles.heading_container}>
               
-              
-              <div className={styles.heading}>Category: </div>
+              <div className={styles.heading}>
+                Category: 
+              </div>
+
               <div className={styles.heading_sub}>
-              {trivia && trivia[questionNum].category}
+                {trivia && trivia[questionNum].category}
               </div>
             
             </div>
             
             <div className={styles.card}>
               <div className={styles.question}>
-
                 Q: {trivia && ReactHtmlParser(trivia[questionNum].question)}
-
-                
-                
               </div>
 
-                <p>
+              <p>
                 This is the answer:{trivia && trivia[questionNum].correct_answer}
-                </p>
+              </p>
             </div>
 
             <div className={styles.btn_container}>
-              <button className={`${styles.btn} ${styles.btn_red}`} onClick={()=>scoreHandler("true")}><FiThumbsUp/> True</button>
-              <button className={`${styles.btn} ${styles.btn_green}`} onClick={()=>scoreHandler("false")}><FiThumbsDown/> False</button>
-              
+              <button className={`${styles.btn} ${styles.btn_green}`} onClick={()=>scoreHandler("true")}><FiThumbsUp/> True</button>
+              <button className={`${styles.btn} ${styles.btn_red}`} onClick={()=>scoreHandler("false")}><FiThumbsDown/> False</button>
             </div>
 
 
@@ -191,18 +173,20 @@ const resetHandler = () => {
 
 if (questionNum === trivia.length) {
   return (
-   <>
+  
     <div className={styles.App}>
-    <div className={styles.container}>
-      <div className={styles.heading_container}>
-    <div className={styles.heading}>Results: {score} / {trivia.length}</div>
-    </div>
-      <Table trivia={trivia}/>
-      <button className={`${styles.btn} ${styles.btn_green}`} onClick={resetHandler}>Play Again?</button>
-      
-    </div>
+      <div className={styles.container}>
+        <div className={styles.heading_container}>
+          <div className={styles.heading}>
+            Results: {score} / {trivia.length}
+          </div>
+        </div>
+        <Table trivia={trivia}/>
+        <button className={`${styles.btn} ${styles.btn_green}`} onClick={resetHandler}>Play Again?</button>
+        
+      </div>
   </div>
-  </>
+
   )
 }
   
