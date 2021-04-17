@@ -150,12 +150,13 @@ const resetHandler = () => {
                 
             </div>
             
-            <div className={styles.heading}>
+            <div className={styles.heading_container}>
               
               
-              <div className="heading">Category: </div>
-              
+              <div className={styles.heading}>Category: </div>
+              <div className={styles.heading_sub}>
               {trivia && trivia[questionNum].category}
+              </div>
             
             </div>
             
@@ -193,8 +194,9 @@ if (questionNum === trivia.length) {
    <>
     <div className={styles.App}>
     <div className={styles.container}>
+      <div className={styles.heading_container}>
     <div className={styles.heading}>Results: {score} / {trivia.length}</div>
-
+    </div>
       <Table trivia={trivia}/>
       <button className={`${styles.btn} ${styles.btn_green}`} onClick={resetHandler}>Play Again?</button>
       
