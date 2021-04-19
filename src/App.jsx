@@ -16,7 +16,7 @@ function App() {
   const [error, setError] = useState('');
   const [questionNum, setQuestionNum] = useState(0); //users current question number
   const [score, setScore] = useState(0); //users current score
-  const [start, setStart] = useState(false);
+  const [start, setStart] = useState(false); // trigger start of game
   const [reset, setReset] = useState(false); //resets game
   
 
@@ -37,7 +37,6 @@ function App() {
       }
     }
     if(reset){
-      console.log("Reset was True, now set false");
       setReset(false)
     }
     console.log("fetching data!")
@@ -46,6 +45,10 @@ function App() {
     fetchData();
     
   }, [reset]);
+
+
+
+
 
 const scoreHandler = (answer) => {
   
@@ -61,12 +64,10 @@ const scoreHandler = (answer) => {
 }
 
 const startHandler = () => {
-  console.log("started");
   setStart(true);
 }
 
 const resetHandler = () => {
-  console.log("reset!");
   setTrivia([]);
   setQuestionNum(0);
   setScore(0);
@@ -76,33 +77,31 @@ const resetHandler = () => {
 }
 
 // loading screen
-// some sort of welcome / intro screen
+// need to pass error message if there is one
 
-  if (!start) {
-    return (
-      
-      <div className={styles.App}>
-           <div className={styles.container}>
-            {loading ? <h2>Loading...</h2> : <h2>{error}</h2> }
-            {!loading && (
+if (!start) {
+  return (
+    
+    <div className={styles.App}>
+          <div className={styles.container}>
+            {loading ? <div className={styles.heading}>Loading...</div> : (
               <>
-            <p> these are the instructions </p>
+              <div className={styles.heading}>Instructions:</div>
+              <div className={styles.card}>
+                <p> Simple true/false 10 questions. See if you can get all ten correct!</p>
+              </div>
               <button className={`${styles.btn} ${styles.btn_green}`} onClick={startHandler} >Start Game!</button>
               </>
             )}
-           </div>
+          </div>
+    </div>
 
-      </div>
-      
-    )
-  }
-
-
-  // screen 2
+  )
+}
 
 
- for(;questionNum < trivia.length;) 
- {
+// screen 2
+if(questionNum < trivia.length) {
   return (
     <div className={styles.App}>
         
@@ -183,7 +182,6 @@ if (questionNum === trivia.length) {
         </div>
         <Table trivia={trivia}/>
         <button className={`${styles.btn} ${styles.btn_green}`} onClick={resetHandler}>Play Again?</button>
-        
       </div>
   </div>
 
