@@ -1,5 +1,16 @@
 @import-normalize;
 
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
 * {
   box-sizing: border-box;
+  
 }
+
+body {
+  background: rgb(66, 1, 81);
+  background: radial-gradient(circle, rgb(82, 0, 103) 0%, rgba(62,20,86,1) 100%);
+  overflow: hidden;
+
+}
+

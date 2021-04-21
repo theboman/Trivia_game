@@ -1,16 +1,29 @@
+:root {
+  --fontlighter: #e0dbf3;
+  --secondary-color: rgba(93, 11, 98, .75);
+}
+
+
+
 .App {
   display:flex;
   align-content: center;
   align-items: center;
   justify-content: center;
+  font-family: 'Roboto';
+  color: var(--fontlighter);
+
+  
 }
+
+
 .container {
   display:flex;
   width: 350px;
   min-height: 400px;
-  background-color:rgb(234, 234, 234);
+  background: linear-gradient(to bottom, #3e0c65, #350e43); 
   border-radius: 5px;
-  box-shadow:5px 5px 8px 1px #888888;
+  box-shadow:4px 8px 20px -10px rgba(0,0,0,.1);
   margin-top: 20px;
   padding: 10px;
   flex-direction: column;
@@ -25,11 +38,13 @@
 .heading {
   font-size: 2em;
   font-weight:bold;
+  letter-spacing: 1.5px;
   
 }
 
 .heading_sub {
   font-size: 1.25em;
+  min-height: 48px;
 }
 
 .score {
@@ -43,7 +58,7 @@
   display:flex;
   flex-direction: column;
   width: 180px;
-  background-color:rgb(118, 118, 118);
+  background-color:var(--secondary-color);
   margin: 10px 5px;
   padding: 5px;
   border-radius: 5px;
@@ -51,11 +66,11 @@
 }
 
 .score_heading {
-  color:white;
+  color:var(--fontlighter);
 }
 
 .score_results {
-  background-color:white;
+  background-color:var(--fontlighter);
   border-radius: 3px;
   width: 90%;
   text-align: center;
@@ -65,25 +80,29 @@
 }
 
 .question {
+  color:var(--fontlighter);
   font-size: 1.25em;
   line-height: 1.5;
   padding: 10px;
+  min-height: 160px;
 
 }
 
 .question::first-letter {
+  color:black;
+  font-family: 'serif';
   font-size: 2em;
-  padding: 8px 5px;
+  padding: 7px 6px;
   float: left;
   line-height: 1;
   font-weight: bold;
   margin-right: 9px;
-  background-color: #f6f6b6;
+  background-color: #e2e2a4;
   border-radius: 5px;
 }
 
 .card {
-  background: white;
+  background-color:var(--secondary-color);
   width: 320px;
   margin: 5px auto;
   border-radius: 9px;
@@ -99,11 +118,13 @@
 }
 
 .btn {
+ 
   margin: 10px;
   padding: 10px 20px;
   font-size: 1.2em;
+  border:none;
   border-radius: 10px;
-  color:white;
+  color:var(--fontlighter);
 }
 
 .btn:focus {
@@ -111,10 +132,21 @@
 }
 
 .btn_red {
-  background-color:red;
+  border: 1px solid red;
+
+  /* background-color:red; */
+  background-color: transparent;
+
 }
 
 .btn_green {
-  background-color:green;
+  border: 1px solid green;
+  /* background-color:green; */
+  background-color: transparent;
 }
 
+.answer {
+  position: absolute;
+  left: 30px;
+  top: 30px;
+}

@@ -1,5 +1,6 @@
 import { useState, useEffect} from 'react';
 import ReactHtmlParser from 'react-html-parser';
+import { moiton } from 'framer-motion';
 
 import {FiThumbsUp} from 'react-icons/fi'
 import {FiThumbsDown} from 'react-icons/fi'
@@ -88,7 +89,10 @@ if (!start) {
               <>
               <div className={styles.heading}>Instructions:</div>
               <div className={styles.card}>
-                <p> Simple true/false 10 questions. See if you can get all ten correct!</p>
+                <div className={styles.question}>
+                <p> Play a game. A simple True/False challenge! 
+                See if you can get all ten correct! </p>
+                </div>
               </div>
               <button className={`${styles.btn} ${styles.btn_green}`} onClick={startHandler} >Start Game!</button>
               </>
@@ -151,9 +155,7 @@ if(questionNum < trivia.length) {
                 Q: {trivia && ReactHtmlParser(trivia[questionNum].question)}
               </div>
 
-              <p>
-                This is the answer:{trivia && trivia[questionNum].correct_answer}
-              </p>
+              
             </div>
 
             <div className={styles.btn_container}>
@@ -162,6 +164,9 @@ if(questionNum < trivia.length) {
             </div>
 
 
+        </div>
+        <div className={styles.answer}>
+                This is the answer:{trivia && trivia[questionNum].correct_answer}
         </div>
   
     </div>

@@ -8,11 +8,11 @@ table {
 }
 
 thead {
-  background-color: rgb(13, 35, 35);
+  background-color: rgb(29, 31, 31);
   font-size: .75em;
   font-weight: bold;
   text-align: center;
-  color: white;
+  color: var(--fontlighter);
   
 }
 
