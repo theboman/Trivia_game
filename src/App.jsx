@@ -1,6 +1,6 @@
 import { useState, useEffect} from 'react';
 import ReactHtmlParser from 'react-html-parser';
-import { moiton } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 import {FiThumbsUp} from 'react-icons/fi'
 import {FiThumbsDown} from 'react-icons/fi'
@@ -109,7 +109,11 @@ if(questionNum < trivia.length) {
   return (
     <div className={styles.App}>
         
-          <div className={styles.container}>
+          <motion.div className={styles.container} 
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ delay: .5, duration: 1.0 }}
+        >
 
             <div className={styles.score}>
                 <div className={styles.score_box}>
@@ -150,13 +154,17 @@ if(questionNum < trivia.length) {
             
             </div>
             
-            <div className={styles.card}>
+            <motion.div className={styles.card}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: .5, duration: 1.0 }}
+            >
               <div className={styles.question}>
                 Q: {trivia && ReactHtmlParser(trivia[questionNum].question)}
               </div>
 
               
-            </div>
+            </motion.div>
 
             <div className={styles.btn_container}>
               <button className={`${styles.btn} ${styles.btn_green}`} onClick={()=>scoreHandler("true")}><FiThumbsUp/> True</button>
@@ -164,7 +172,7 @@ if(questionNum < trivia.length) {
             </div>
 
 
-        </div>
+        </motion.div>
         <div className={styles.answer}>
                 This is the answer:{trivia && trivia[questionNum].correct_answer}
         </div>
