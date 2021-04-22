@@ -35,6 +35,7 @@ function App() {
       console.log("data done fetching!")
       } catch (err) {
         setError(err);
+        console.log(error);
       }
     }
     if(reset){
