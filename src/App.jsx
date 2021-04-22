@@ -19,6 +19,7 @@ function App() {
   const [score, setScore] = useState(0); //users current score
   const [start, setStart] = useState(false); // trigger start of game
   const [reset, setReset] = useState(false); //resets game
+  const [pause, setPause] = useState(false); // pauses / feedback and disable btns, when user clicks
   
 
   useEffect(()=> {
@@ -33,8 +34,8 @@ function App() {
       setTrivia(questions);
       setLoading(false); 
       console.log("data done fetching!")
-      } catch (err) {
-        setError(err);
+      } catch (error) {
+        setError(error);
         console.log(error);
       }
     }
@@ -46,16 +47,27 @@ function App() {
     
     fetchData();
     
-  }, [reset]);
+  }, [reset, error]);
 
 
+useEffect(()=>{
+  if(pause) {
+    setTimeout(() => {
+      console.log("I have been triggered");
+      setPause(false);
+    
+    }, 3000);
+  } 
 
+  console.log("done");
+
+},[pause]);
 
 
 const scoreHandler = (answer) => {
   
   setQuestionNum(questionNum+1);
-
+  setPause(true);
   if(answer === trivia[questionNum].correct_answer.toLowerCase()) {
     setScore(score+1);
     trivia[questionNum].users_answer="Correct"; 
@@ -175,6 +187,7 @@ if(questionNum < trivia.length) {
 
         </motion.div>
         <div className={styles.answer}>
+          
                 This is the answer:{trivia && trivia[questionNum].correct_answer}
         </div>
   
