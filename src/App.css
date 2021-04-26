@@ -4,7 +4,6 @@
 }
 
 
-
 .App {
   display:flex;
   align-content: center;
@@ -13,7 +12,6 @@
   font-family: 'Roboto';
   color: var(--fontlighter);
 
-  
 }
 
 
@@ -111,10 +109,25 @@
 
 .btn_container {
   display:flex;
+  position:relative;
   justify-content: center;
   align-content: center;
   align-items: center;
   
+}
+
+.feedback {
+  position:absolute;
+  margin: 0 auto;
+  text-align: center;
+  padding: 20px;
+
+  width: 200px;
+  height: 120px;
+  background-color: black;
+  left: 65px;
+  bottom: 20px;
+  z-index: 4;
 }
 
 .btn {
@@ -144,6 +157,13 @@
   /* background-color:green; */
   background-color: transparent;
 }
+
+.disabled {
+  opacity: 0.2;
+  cursor: not-allowed;
+}
+
+
 
 .answer {
   position: absolute;

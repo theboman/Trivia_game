@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import {FiThumbsUp} from 'react-icons/fi'
 import {FiThumbsDown} from 'react-icons/fi'
 
-import styles from './App.module.css';
+import './App.css';
 import Table from './components/Table/Table';
 
 
@@ -19,7 +19,7 @@ function App() {
   const [score, setScore] = useState(0); //users current score
   const [start, setStart] = useState(false); // trigger start of game
   const [reset, setReset] = useState(false); //resets game
-  const [pause, setPause] = useState(false); // pauses / feedback and disable btns, when user clicks
+  const [btnDisabled, setBtnDisabled] = useState(false); // disable btns, when user clicks
   
 
   useEffect(()=> {
@@ -34,9 +34,9 @@ function App() {
       setTrivia(questions);
       setLoading(false); 
       console.log("data done fetching!")
-      } catch (error) {
-        setError(error);
-        console.log(error);
+      } catch (err) {
+        setError(err);
+        console.log(err);
       }
     }
     if(reset){
@@ -44,37 +44,42 @@ function App() {
     }
     console.log("fetching data!")
     
-    
+    if(trivia) {
     fetchData();
+    }
     
-  }, [reset, error]);
+  }, [reset]);
 
 
+//disabled btns after answer to give feedback correct or wrong answer
 useEffect(()=>{
-  if(pause) {
+  if(btnDisabled) {
     setTimeout(() => {
-      console.log("I have been triggered");
-      setPause(false);
+      setBtnDisabled(false);
     
-    }, 3000);
+    }, 2500);
   } 
 
-  console.log("done");
-
-},[pause]);
+},[btnDisabled])
 
 
 const scoreHandler = (answer) => {
-  
-  setQuestionNum(questionNum+1);
-  setPause(true);
+  console.log("button triggered:", answer);
+  const temp = [...trivia];
   if(answer === trivia[questionNum].correct_answer.toLowerCase()) {
     setScore(score+1);
-    trivia[questionNum].users_answer="Correct"; 
+
+    temp[questionNum].users_answer="Correct"; 
+    // debugger
   }
   else {
-    trivia[questionNum].users_answer="Wrong";
+    temp[questionNum].users_answer="Wrong";
   } 
+  setTrivia(temp);
+  
+  setQuestionNum(questionNum+1);
+  console.log(trivia)
+  setBtnDisabled(true);
 }
 
 const startHandler = () => {
@@ -96,18 +101,19 @@ const resetHandler = () => {
 if (!start) {
   return (
     
-    <div className={styles.App}>
-          <div className={styles.container}>
-            {loading ? <div className={styles.heading}>Loading...</div> : (
+    <div className="App">
+          <div className="container">
+            
+            {loading ? <div className="heading">Loading...</div> : (
               <>
-              <div className={styles.heading}>Instructions:</div>
-              <div className={styles.card}>
-                <div className={styles.question}>
+              <div className="heading">Instructions:</div>
+              <div className="card">
+                <div className="question">
                 <p> Play a game. A simple True/False challenge! 
                 See if you can get all ten correct! </p>
                 </div>
               </div>
-              <button className={`${styles.btn} ${styles.btn_green}`} onClick={startHandler} >Start Game!</button>
+              <button className="btn btn_green" onClick={startHandler} >Start Game!</button>
               </>
             )}
           </div>
@@ -120,34 +126,30 @@ if (!start) {
 // screen 2
 if(questionNum < trivia.length) {
   return (
-    <div className={styles.App}>
+    <div className="App" key={questionNum}>
         
-          <motion.div className={styles.container} 
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={{ delay: .5, duration: 1.0 }}
-        >
+          <div className="container">
 
-            <div className={styles.score}>
-                <div className={styles.score_box}>
+            <div className="score">
+                <div className="score_box">
 
-                  <div className={styles.score_heading}>
+                  <div className="score_heading">
                     Question:
                   </div>
 
-                  <div className={styles.score_results}>
+                  <div className="score_results">
                     {questionNum+1} of {trivia.length}
                   </div>
 
                 </div>
 
-                <div className={styles.score_box}>
+                <div className="score_box">
 
-                    <div className={styles.score_heading}>
+                    <div className="score_heading">
                       Score: 
                     </div>
 
-                    <div className={styles.score_results}>
+                    <div className="score_results">
                         {score}/{trivia.length}
                     </div>
 
@@ -155,39 +157,52 @@ if(questionNum < trivia.length) {
                 
             </div>
             
-            <div className={styles.heading_container}>
+            <div className="heading_container">
               
-              <div className={styles.heading}>
+              <div className="heading">
                 Category: 
               </div>
 
-              <div className={styles.heading_sub}>
+              <div className="heading_sub">
                 {trivia && trivia[questionNum].category}
               </div>
             
             </div>
             
-            <motion.div className={styles.card}
+            <motion.div className="card"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: .5, duration: 1.0 }}
+              transition={{ delay: .5, duration: 1 }}
             >
-              <div className={styles.question}>
+              <div className="question">
                 Q: {trivia && ReactHtmlParser(trivia[questionNum].question)}
               </div>
 
               
             </motion.div>
 
-            <div className={styles.btn_container}>
-              <button className={`${styles.btn} ${styles.btn_green}`} onClick={()=>scoreHandler("true")}><FiThumbsUp/> True</button>
-              <button className={`${styles.btn} ${styles.btn_red}`} onClick={()=>scoreHandler("false")}><FiThumbsDown/> False</button>
+            <div className="btn_container">
+              {btnDisabled? <div className="feedback">{trivia[questionNum].users_answer}</div>:""}
+              <button 
+                className={btnDisabled ? "btn btn_green disabled" : "btn btn_green"}
+                onClick={()=>scoreHandler("true")}>
+                  <FiThumbsUp/> True
+              </button>
+
+              <button 
+                className={btnDisabled ? "btn btn_red disabled" : "btn btn_red"}
+               
+                onClick={()=>scoreHandler("false")}
+                disabled={btnDisabled}>
+                  <FiThumbsDown/> False
+              </button>
+
             </div>
 
 
-        </motion.div>
-        <div className={styles.answer}>
-          
+        </div>
+        <div className="answer">
+
                 This is the answer:{trivia && trivia[questionNum].correct_answer}
         </div>
   
@@ -200,15 +215,15 @@ if(questionNum < trivia.length) {
 if (questionNum === trivia.length) {
   return (
   
-    <div className={styles.App}>
-      <div className={styles.container}>
-        <div className={styles.heading_container}>
-          <div className={styles.heading}>
+    <div className="App">
+      <div className="container">
+        <div className="heading_container">
+          <div className="heading">
             Results: {score} / {trivia.length}
           </div>
         </div>
         <Table trivia={trivia}/>
-        <button className={`${styles.btn} ${styles.btn_green}`} onClick={resetHandler}>Play Again?</button>
+        <button className="btn btn_green" onClick={resetHandler}>Play Again?</button>
       </div>
   </div>
 
