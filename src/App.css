@@ -124,7 +124,8 @@
 
   width: 200px;
   height: 120px;
-  background-color: black;
+  background-color: rgb(87, 87, 87);
+  color: white;
   left: 65px;
   bottom: 20px;
   z-index: 4;
