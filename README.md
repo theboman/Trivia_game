@@ -1,7 +1,5 @@
 # A simple Trivia Game 
 
-[live example](https://trivia-game-4wuwklnds-boopfer9k9.vercel.app/)
-
 <img src="https://github.com/theboman/Trivia_game/blob/master/public/trivia_game_image.png?raw=true" alt="triva app"  height="300">
 
 
@@ -32,4 +30,8 @@ Goals - To make a simple trivia game with True/False answers. Retrive questions 
 
 * Not happy with being able to use react dev tools and view answers. Would correct this with the server and make these another endpoint. 
 * Using React HTML parser. Much easier than creating a /regex replace for each of the HTML codes. 
+* Had state all broken up, big pain to synchronize updates of the state, so put as much as possiable into single object state. Always a better stratagy.
+* Added very basic animation, I really like framer-motion.
+* Used react-icons, lacks finite control of svg viewbox it seems.
+* Could build a lot of components for this, but decided to keep somewhat sane and build into .app. Larger scale project would warrent it.
 
