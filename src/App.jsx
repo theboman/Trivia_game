@@ -1,6 +1,6 @@
 import { useState, useEffect} from 'react';
 import ReactHtmlParser from 'react-html-parser';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 
 import {FiThumbsUp} from 'react-icons/fi'
 import {FiThumbsDown} from 'react-icons/fi'
@@ -12,8 +12,6 @@ import Table from './components/Table/Table';
 
 function App() {
 
-  
-
   const [game, setGame] = useState({
     trivia: [], //trivia questions put here
     loading: true,
@@ -23,17 +21,14 @@ function App() {
     questionNum: 0, //current question
     btnDisabled: false //disable btns while given feedback
   }); 
- 
   const [reset, setReset] = useState(false); //resets game
+
 
   
   useEffect(()=> {
+    setReset(false)
     const temp = {...game};
-    if(reset){
-      setReset(false)
-    }
-
-
+    
     async function fetchData(){
       //setGame.loading=true;
       try {
@@ -51,11 +46,8 @@ function App() {
   
       }
     }
-   
     console.log("fetching data!")
-    
     fetchData();
-    
     
   }, [reset]);
 
@@ -68,7 +60,7 @@ useEffect(()=>{
       temp.btnDisabled = false;
       setGame(temp);
     
-    }, 2000);
+    }, 1000);
   } 
 
 },[game.btnDisabled])
@@ -88,7 +80,6 @@ const scoreHandler = (answer) => {
   temp.btnDisabled = true;
   
   setGame(temp);
-  console.log(game);
 }
 
 const startHandler = () => {
@@ -98,6 +89,7 @@ const startHandler = () => {
 }
 
 const resetHandler = () => {
+  setReset(true);
   setGame({
     trivia: [],
     loading: true,
@@ -107,6 +99,8 @@ const resetHandler = () => {
     questionNum: 0,
     btnDisabled: false
   })
+  console.log("value of reset", reset);
+  debugger
 }
 
 // loading screen
@@ -136,6 +130,19 @@ if (!game.start) {
   )
 }
 
+
+function color_feedback () {
+  
+  if(game.trivia[game.questionNum-1].users_answer === 'Correct') {
+    console.log("Correct");
+    const fb_Class = "feedback fb_green";
+    return fb_Class;
+  } else {
+    console.log("wrong, wrong and wrong!")
+    const fb_Class = "feedback fb_red";
+    return fb_Class;
+  }
+}
 
 // screen 2
 if(game.questionNum < game.trivia.length) {
@@ -186,18 +193,21 @@ if(game.questionNum < game.trivia.length) {
             <motion.div className="card"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: .2, duration: .5 }}
+              transition={{ delay: .5, duration: .5 }}
             >
               <div className="question">
                 Q: {game.trivia && ReactHtmlParser(game.trivia[game.questionNum].question)}
               </div>
-
-              
             </motion.div>
 
             <div className="btn_container">
-              {/* {game.btnDisabled? <div className="feedback">{game.trivia[game.questionNum].users_answer}</div>:""} */}
-                            {game.btnDisabled? <div className="feedback">{game.trivia[game.questionNum-1].users_answer}</div>:""}
+                            {game.btnDisabled?<AnimatePresence><motion.div
+                                 initial={{ opacity: 0 }}
+                                 animate={{ opacity: 1 }}
+                                 exit={{ opacity: 0 }}
+                                 transition={{ duration: .2 }}
+                                 key={game.questionNum-1}
+                              className={`feedback ${color_feedback()}`} >{game.trivia[game.questionNum-1].users_answer}</motion.div></AnimatePresence> :""}
 
               <button 
                 className={game.btnDisabled ? "btn btn_green disabled" : "btn btn_green"}
@@ -218,7 +228,6 @@ if(game.questionNum < game.trivia.length) {
 
         </div>
         <div className="answer">
-
                 This is the answer:{game.trivia && game.trivia[game.questionNum].correct_answer}
         </div>
   
@@ -234,7 +243,7 @@ if (game.questionNum === game.trivia.length) {
     <div className="App">
       <div className="container">
         <div className="heading_container">
-          <div className="heading">
+          <div className="heading center">
             Results: {game.score} / {game.trivia.length}
           </div>
         </div>
