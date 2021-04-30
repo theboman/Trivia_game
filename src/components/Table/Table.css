@@ -1,5 +1,5 @@
 table {
-  width: 320px;
+  width: 330px;
   border-collapse: collapse;
   text-align: center;
   margin: 5px;
@@ -16,12 +16,12 @@ thead {
 }
 
 
-.table--question {
+.table__question {
   font-size: .8em;
   text-align: left;
 }
 
-.table--row--num {
+.table__row__num {
   width: 20px;
 }
 

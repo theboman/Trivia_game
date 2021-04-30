@@ -11,7 +11,7 @@ const Table = ({trivia}) => {
     <table>
       <thead>
         <tr>
-          <th className="table--row--num">
+          <th className="table__row__num">
             #
           </th>
           <th>
@@ -40,7 +40,7 @@ const Table = ({trivia}) => {
               
               </td>
 
-              <td className="table--question">
+              <td className="table__question">
                 {ReactHtmlParser(trivia.question)}
               </td>
 

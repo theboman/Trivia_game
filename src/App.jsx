@@ -39,14 +39,12 @@ function App() {
       temp.trivia = questions;
       temp.loading = false; 
       setGame(temp);
-      console.log("data done fetching!")
       } catch (err) {
         console.log(err);
         temp.error = err;
   
       }
     }
-    console.log("fetching data!")
     fetchData();
     
   }, [reset]);
@@ -63,7 +61,7 @@ useEffect(()=>{
     }, 1000);
   } 
 
-},[game.btnDisabled])
+},[game])
 
 
 const scoreHandler = (answer) => {
@@ -133,11 +131,9 @@ if (!game.start) {
 function color_feedback () {
   
   if(game.trivia[game.questionNum-1].users_answer === 'Correct') {
-    console.log("Correct");
     const fb_Class = "feedback fb--green";
     return fb_Class;
   } else {
-    console.log("wrong, wrong and wrong!")
     const fb_Class = "feedback fb--red";
     return fb_Class;
   }
