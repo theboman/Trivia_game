@@ -1,6 +1,5 @@
 table {
   width: 330px;
-  /* background-color:pink; */
   border-collapse: collapse;
   text-align: center;
   margin: 5px;
@@ -17,12 +16,12 @@ thead {
 }
 
 
-.question {
+.table__question {
   font-size: .8em;
   text-align: left;
 }
 
-.hdnum {
+.table__row__num {
   width: 20px;
 }
 
@@ -32,10 +31,10 @@ th, td {
 
 }
 
-.correct {
-  background-color: rgba(11, 159, 11, .4);
+.table--correct {
+  background-color: rgba(11, 159, 11, .3);
 }
 
-.incorrect {
-  background-color: rgba(241, 16, 16, 0.3);
+.table--incorrect {
+  background-color: rgba(241, 16, 16, .3);
 }

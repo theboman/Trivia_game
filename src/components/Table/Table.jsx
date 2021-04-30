@@ -1,5 +1,6 @@
-import styles from './Table.module.css'
+import './Table.css'
 import ReactHtmlParser from 'react-html-parser';
+import { motion } from 'framer-motion';
 
 
 const Table = ({trivia}) => {
@@ -10,7 +11,7 @@ const Table = ({trivia}) => {
     <table>
       <thead>
         <tr>
-          <th className={styles.hdnum}>
+          <th className="table__row__num">
             #
           </th>
           <th>
@@ -28,13 +29,18 @@ const Table = ({trivia}) => {
       <tbody>
         {trivia.map((trivia, index)=> {
           return (
-            <tr key={index} className={trivia.users_answer === "Correct"? styles.correct: styles.incorrect} >
+            <motion.tr 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: .2, duration: .4 }}
+              key={index} 
+              className={trivia.users_answer === "Correct"? "table--correct": "table--incorrect"} >
               <td>
               {index+1}
               
               </td>
 
-              <td className={styles.question}>
+              <td className="table__question">
                 {ReactHtmlParser(trivia.question)}
               </td>
 
@@ -48,7 +54,7 @@ const Table = ({trivia}) => {
 
 
               </td>
-            </tr>
+            </motion.tr>
           )
         })}
       </tbody>

@@ -1,6 +1,6 @@
 import { useState, useEffect} from 'react';
 import ReactHtmlParser from 'react-html-parser';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 
 import {FiThumbsUp} from 'react-icons/fi'
 import {FiThumbsDown} from 'react-icons/fi'
@@ -12,99 +12,104 @@ import Table from './components/Table/Table';
 
 function App() {
 
-  const [trivia, setTrivia] = useState([]); 
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
-  const [questionNum, setQuestionNum] = useState(0); //users current question number
-  const [score, setScore] = useState(0); //users current score
-  const [start, setStart] = useState(false); // trigger start of game
+  const [game, setGame] = useState({
+    trivia: [], //trivia questions put here
+    loading: true,
+    error: '',
+    start: false, //trigger to start game
+    score: 0, //users current score
+    questionNum: 0, //current question
+    btnDisabled: false //disable btns while given feedback
+  }); 
   const [reset, setReset] = useState(false); //resets game
-  const [btnDisabled, setBtnDisabled] = useState(false); // disable btns, when user clicks
-  
 
+
+  
   useEffect(()=> {
+    setReset(false)
+    const temp = {...game};
     
     async function fetchData(){
-      setLoading(true);
+      //setGame.loading=true;
       try {
       const response = await fetch('https://opentdb.com/api.php?amount=10&difficulty=hard&type=boolean');
       const data = await response.json()
       const [...questions] = data.results;
       questions.forEach(question => question.users_answer="" ) //adds the users response to the returned questions
-      setTrivia(questions);
-      setLoading(false); 
-      console.log("data done fetching!")
+      temp.trivia = questions;
+      temp.loading = false; 
+      setGame(temp);
       } catch (err) {
-        setError(err);
         console.log(err);
+        temp.error = err;
+  
       }
     }
-    if(reset){
-      setReset(false)
-    }
-    console.log("fetching data!")
-    
-    if(trivia) {
     fetchData();
-    }
     
   }, [reset]);
 
 
 //disabled btns after answer to give feedback correct or wrong answer
 useEffect(()=>{
-  if(btnDisabled) {
+  if(game.btnDisabled) {
     setTimeout(() => {
-      setBtnDisabled(false);
+      const temp = {...game}
+      temp.btnDisabled = false;
+      setGame(temp);
     
-    }, 2500);
+    }, 1000);
   } 
 
-},[btnDisabled])
+},[game])
 
 
 const scoreHandler = (answer) => {
-  console.log("button triggered:", answer);
-  const temp = [...trivia];
-  if(answer === trivia[questionNum].correct_answer.toLowerCase()) {
-    setScore(score+1);
-
-    temp[questionNum].users_answer="Correct"; 
-    // debugger
+  
+  const temp = {...game};
+  if(answer === game.trivia[game.questionNum].correct_answer.toLowerCase()) {
+    temp.score++;
+    temp.trivia[game.questionNum].users_answer="Correct"; 
   }
   else {
-    temp[questionNum].users_answer="Wrong";
+    temp.trivia[game.questionNum].users_answer="Wrong";
   } 
-  setTrivia(temp);
+  temp.questionNum++
+  temp.btnDisabled = true;
   
-  setQuestionNum(questionNum+1);
-  console.log(trivia)
-  setBtnDisabled(true);
+  setGame(temp);
 }
 
 const startHandler = () => {
-  setStart(true);
+  const temp = {...game};
+  temp.start = true;
+  setGame(temp);
 }
 
 const resetHandler = () => {
-  setTrivia([]);
-  setQuestionNum(0);
-  setScore(0);
-  setStart(false);
-  setLoading(true);
   setReset(true);
+  setGame({
+    trivia: [],
+    loading: true,
+    error: '',
+    start: false,
+    score: 0,
+    questionNum: 0,
+    btnDisabled: false
+  })
+
 }
 
 // loading screen
 // need to pass error message if there is one
 
-if (!start) {
+if (!game.start) {
   return (
     
     <div className="App">
           <div className="container">
             
-            {loading ? <div className="heading">Loading...</div> : (
+            {game.loading ? <div className="heading"><div className="center card">Loading...</div></div> : (
               <>
               <div className="heading">Instructions:</div>
               <div className="card">
@@ -113,7 +118,7 @@ if (!start) {
                 See if you can get all ten correct! </p>
                 </div>
               </div>
-              <button className="btn btn_green" onClick={startHandler} >Start Game!</button>
+              <button className="btn btn--green" onClick={startHandler} >Start Game!</button>
               </>
             )}
           </div>
@@ -123,48 +128,59 @@ if (!start) {
 }
 
 
+function color_feedback () {
+  
+  if(game.trivia[game.questionNum-1].users_answer === 'Correct') {
+    const fb_Class = "feedback fb--green";
+    return fb_Class;
+  } else {
+    const fb_Class = "feedback fb--red";
+    return fb_Class;
+  }
+}
+
 // screen 2
-if(questionNum < trivia.length) {
+if(game.questionNum < game.trivia.length) {
   return (
-    <div className="App" key={questionNum}>
+    <div className="App" key={game.questionNum}>
         
           <div className="container">
 
             <div className="score">
-                <div className="score_box">
+                <div className="score__box">
 
-                  <div className="score_heading">
+                  <div className="score__heading">
                     Question:
                   </div>
 
-                  <div className="score_results">
-                    {questionNum+1} of {trivia.length}
+                  <div className="score__results">
+                    {game.questionNum+1} of {game.trivia.length}
                   </div>
 
                 </div>
 
-                <div className="score_box">
+                <div className="score__box">
 
-                    <div className="score_heading">
+                    <div className="score__heading">
                       Score: 
                     </div>
 
-                    <div className="score_results">
-                        {score}/{trivia.length}
+                    <div className="score__results">
+                        {game.score}/{game.trivia.length}
                     </div>
 
                 </div> 
                 
             </div>
             
-            <div className="heading_container">
+            <div className="heading__container">
               
               <div className="heading">
                 Category: 
               </div>
 
-              <div className="heading_sub">
-                {trivia && trivia[questionNum].category}
+              <div className="heading__sub">
+                {game.trivia && game.trivia[game.questionNum].category}
               </div>
             
             </div>
@@ -172,28 +188,33 @@ if(questionNum < trivia.length) {
             <motion.div className="card"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: .5, duration: 1 }}
+              transition={{ delay: .5, duration: .5 }}
             >
               <div className="question">
-                Q: {trivia && ReactHtmlParser(trivia[questionNum].question)}
+                Q: {game.trivia && ReactHtmlParser(game.trivia[game.questionNum].question)}
               </div>
-
-              
             </motion.div>
 
-            <div className="btn_container">
-              {btnDisabled? <div className="feedback">{trivia[questionNum].users_answer}</div>:""}
+            <div className="btn__container">
+                            {game.btnDisabled?<AnimatePresence><motion.div
+                                 initial={{ opacity: 0 }}
+                                 animate={{ opacity: 1 }}
+                                 exit={{ opacity: 0 }}
+                                 transition={{ duration: .2 }}
+                                 key={game.questionNum-1}
+                              className={`feedback ${color_feedback()}`} >{game.trivia[game.questionNum-1].users_answer}</motion.div></AnimatePresence> :""}
+
               <button 
-                className={btnDisabled ? "btn btn_green disabled" : "btn btn_green"}
+                className={game.btnDisabled ? "btn btn--green disabled" : "btn btn--green"}
                 onClick={()=>scoreHandler("true")}>
                   <FiThumbsUp/> True
               </button>
 
               <button 
-                className={btnDisabled ? "btn btn_red disabled" : "btn btn_red"}
+                className={game.btnDisabled ? "btn btn--red disabled" : "btn btn--red"}
                
                 onClick={()=>scoreHandler("false")}
-                disabled={btnDisabled}>
+                disabled={game.btnDisabled}>
                   <FiThumbsDown/> False
               </button>
 
@@ -201,29 +222,29 @@ if(questionNum < trivia.length) {
 
 
         </div>
-        <div className="answer">
-
-                This is the answer:{trivia && trivia[questionNum].correct_answer}
+      
+        {/* <div className="answer">
+                This is the answer:{game.trivia && game.trivia[game.questionNum].correct_answer}
         </div>
-  
+   */}
     </div>
   )
  }
 
 // screen 03 final results & reset
 
-if (questionNum === trivia.length) {
+if (game.questionNum === game.trivia.length) {
   return (
   
     <div className="App">
       <div className="container">
-        <div className="heading_container">
-          <div className="heading">
-            Results: {score} / {trivia.length}
+        <div className="heading__container">
+          <div className="heading center">
+            Results: {game.score} / {game.trivia.length}
           </div>
         </div>
-        <Table trivia={trivia}/>
-        <button className="btn btn_green" onClick={resetHandler}>Play Again?</button>
+        <Table trivia={game.trivia}/>
+        <button className="btn btn--green" onClick={resetHandler}>Play Again?</button>
       </div>
   </div>
 
