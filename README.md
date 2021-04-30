@@ -1,4 +1,6 @@
 # A simple Trivia Game 
+repository is here: https://github.com/theboman/Trivia_game
+
 
 <img src="https://github.com/theboman/Trivia_game/blob/master/public/trivia_game_image.png?raw=true" alt="triva app"  height="300">
 
@@ -34,4 +36,11 @@ Goals - To make a simple trivia game with True/False answers. Retrive questions 
 * Added very basic animation, I really like framer-motion.
 * Used react-icons, lacks finite control of svg viewbox it seems.
 * Could build a lot of components for this, but decided to keep somewhat sane and build into .app. Larger scale project would warrent it.
+
+
+# Installing and running
+1. requires internet connection
+2. need to run: npm install to install mondules
+3. npm start - default port is changed to 3009, so localhost:3009 to review, can be changed in the package.json.
+
 
